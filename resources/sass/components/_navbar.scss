@@ -1,0 +1,70 @@
+@use "../abstract" as *;
+
+.sideBar {
+    max-width: 300px;
+}
+
+.mainContent {
+    width: 85%;
+    background-color: $body-bg;
+
+    .bellIcon {
+        background-color: $white-color;
+        border-radius: 10px;
+        padding: 9px 12px !important;
+    }
+}
+
+.parentNavbar {
+    // padding-left: 10px !important;
+    background-color: $white-color;
+    z-index: 2;
+    width: 100%;
+
+    .SideNavbarItem {
+        width: 275px;
+        padding: 15px 0px 15px 10px;
+        border-right: 4px $white-color;
+    }
+
+    .activeSideNavbarItem {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(
+            90deg,
+            rgba(16, 186, 230, 1) 0%,
+            rgba(16, 186, 230, 1) 0%,
+            rgba(106, 212, 239, 1) 46%,
+            rgba(122, 217, 241, 1) 68%,
+            rgba(248, 249, 250, 1) 87%
+        );
+        border-right: 4px solid #212529;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    body::before {
+        display: block;
+        content: "";
+        height: 75.05px;
+    }
+
+    .sideBar {
+        width: 100%;
+    }
+
+    .mainContent {
+        width: 100%;
+    }
+
+    .parentNavbar {
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+
+        .SideNavbarItem {
+            width: 100%;
+            padding: 10px 70px 10px 10px;
+        }
+    }
+}

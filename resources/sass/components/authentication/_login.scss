@@ -1,0 +1,27 @@
+.formContainer {
+    width: 50%;
+}
+
+.loginForm {
+    width: 70%;
+}
+
+.loginImage {
+    width: 50%;
+}
+
+@media screen and (max-width: 992px) {
+    .parentFormContainer {
+        margin: auto;
+        max-width: 600px;
+    }
+
+    .formContainer {
+        width: 100% !important;
+        margin: auto;
+    }
+
+    .loginForm {
+        width: 100%;
+    }
+}

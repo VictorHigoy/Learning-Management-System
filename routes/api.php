@@ -15,10 +15,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+//Login API
+
+Route::post('/login', [UserController::class, 'login']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('register', [UserController::class, 'register']);
-
-Route::post('login', [UserController::class, 'login']);

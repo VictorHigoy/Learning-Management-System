@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
     let user;
 
     const userInfo = localStorage.getItem("user-info");
+    const token = localStorage.getItem("token");
 
     if (userInfo) {
         user = JSON.parse(userInfo);

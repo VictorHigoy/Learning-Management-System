@@ -8,8 +8,8 @@ function Login() {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [error1, setError] = useState();
     let error;
-    console.log(error);
 
     const results = localStorage.getItem("error-info");
     if (results) {
@@ -19,7 +19,7 @@ function Login() {
     const SubmitHandler = async (e) => {
         e.preventDefault();
         let item = { email, password };
-        let result = await fetch("http://127.0.0.1:8000/api/login", {
+        const fetchedData = await fetch("http://127.0.0.1:8000/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,11 +27,18 @@ function Login() {
             },
             body: JSON.stringify(item),
         });
-        result = await result.json();
-        localStorage.setItem("user-info", JSON.stringify(result));
+        const result = await fetchedData.json();
+        if (result.user !== undefined && result.token !== undefined) {
+            localStorage.setItem("user-info", JSON.stringify(result.user));
+            localStorage.setItem("token", JSON.stringify(result.token));
+        } else {
+            localStorage.setItem(
+                "error-info",
+                JSON.stringify("Email or Password is not matched")
+            );
+        }
 
-        localStorage.setItem("error-info", JSON.stringify("true"));
-
+        console.log(result);
         window.location.reload();
     };
 
@@ -88,7 +95,7 @@ function Login() {
                             <a href="">Forgot Password?</a>
                         </div>
                         <div className="mb-3">
-                            <p className="text-danger">{error && user.error}</p>
+                            <p className="text-danger">{error && error}</p>
                         </div>
                         <div className="d-flex justify-content-end">
                             <button type="submit" className="btn btn-primary">

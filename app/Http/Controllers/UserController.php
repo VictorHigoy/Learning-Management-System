@@ -27,6 +27,14 @@ class UserController extends Controller
         {
             return ["error" => "Email or Password is not matched"];
         }
-        return $user;
+
+        $token = $user->createToken('my-app-token')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+        
+        return response($response, 201);
     }
 }

@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
+use App\Models\CourseDeveloper;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,32 +19,34 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create([
+        Student::factory()->create([
             'name' => 'student user',
             'email' => 'student@example.com',
             'password' => bcrypt('test'),
-            'type' => 'student'
+            'section' => '1',
+            'year_level' => '4',
+            'subjects' => 'english, math, science, physical education',
         ]);
 
-        User::factory()->create([
+        Teacher::factory()->create([
             'name' => 'teacher user',
             'email' => 'teacher@example.com',
             'password' => bcrypt('test'),
-            'type' => 'teacher'
+            'year_levels' => '1,2,3,4',
+            'subjects' => 'english, math, science, physical education',
         ]);
 
-        User::factory()->create([
+        CourseDeveloper::factory()->create([
             'name' => 'dev user',
             'email' => 'dev@example.com',
             'password' => bcrypt('test'),
-            'type' => 'dev'
+            'department' => 'CCS',
         ]);
 
-        User::factory()->create([
+        Admin::factory()->create([
             'name' => 'admin user',
             'email' => 'admin@example.com',
             'password' => bcrypt('test'),
-            'type' => 'admin'
         ]);
     }
 }

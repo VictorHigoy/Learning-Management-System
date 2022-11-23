@@ -12,7 +12,7 @@ const Layout = () => {
                 </div>
                 <div className="mainContent bg-light" id="app">
                     <TopNavbar>
-                        <main className="p-5">
+                        <main className="p-sm-5 p-3">
                             <Outlet />
                         </main>
                     </TopNavbar>

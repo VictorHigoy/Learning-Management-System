@@ -1,11 +1,30 @@
 @use "../abstract" as *;
 
 .sideBar {
-    max-width: 300px;
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    background-color: white;
+    z-index: 2;
+
+    .sideNavarLogo {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.topNavbarSearch {
+    width: 100%;
+    max-width: 350px;
+
+    input {
+        height: 40px;
+    }
 }
 
 .mainContent {
-    width: 85%;
+    width: 100%;
+    margin-left: 300px;
     background-color: $body-bg;
 
     .bellIcon {
@@ -42,7 +61,7 @@
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
     body::before {
         display: block;
         content: "";
@@ -51,10 +70,17 @@
 
     .sideBar {
         width: 100%;
+        z-index: 1;
+        height: 0;
+    }
+
+    .collapse {
+        height: 50vh;
     }
 
     .mainContent {
         width: 100%;
+        margin-left: 0;
     }
 
     .parentNavbar {

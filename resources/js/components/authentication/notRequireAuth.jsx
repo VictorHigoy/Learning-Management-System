@@ -2,16 +2,16 @@ import { Outlet, Navigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const NotRequireAuth = () => {
-    const { user } = useAuth();
+    const { role } = useAuth();
 
     function HandlerUser() {
-        if (!user?.type) {
+        if (!role) {
             return <Outlet />;
-        } else if (user?.type === "student") {
+        } else if (role === "student") {
             return <Navigate to="student/home" replace />;
-        } else if (user?.type === "teacher") {
+        } else if (role === "teacher") {
             return <Navigate to="teacher/home" replace />;
-        } else if (user?.type === "admin") {
+        } else if (role === "admin") {
             return <Navigate to="admin/home" replace />;
         } else {
             return <Navigate to="developer/home" replace />;

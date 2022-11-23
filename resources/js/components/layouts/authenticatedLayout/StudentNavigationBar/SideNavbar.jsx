@@ -10,7 +10,14 @@ function Navbar() {
     return (
         <div className="navbar navbar-expand-lg navbar-light py-2 py-lg-4 ps-3 ps-lg-4 pe-3 pe-lg-0 parentNavbar">
             <div className="container-fluid p-0 d-lg-block">
-                <h3 className="py-3 mb-0 mb-lg-5 fw-bold">BESTLINK</h3>
+                <div className="d-flex align-items-center mb-lg-5">
+                    <img
+                        className="sideNavarLogo me-2"
+                        src="/images/newLogin/logo.png"
+                        alt="bcp-logo"
+                    />
+                    <h3 className="py-3 mb-0 fw-bold">BESTLINK</h3>
+                </div>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -24,7 +31,7 @@ function Navbar() {
                 </button>
 
                 <div
-                    className="collapse navbar-collapse"
+                    className="collapse navbar-collapse my-3 my-lg-0"
                     id="navbarNavAltMarkup"
                 >
                     <ul className="list-unstyled text-secondary text-decoration-none">

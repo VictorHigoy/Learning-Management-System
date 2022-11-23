@@ -48,9 +48,9 @@ function Course() {
             >
                 <Link
                     to="/student/course/subject"
-                    className="card mx-auto rounded overflow-hidden cardItemWidth shadow text-dark text-decoration-none position-relative"
+                    className="card mx-auto rounded overflow-hidden shadow text-dark text-decoration-none position-relative cardItemWidth"
                 >
-                    <img className="" src={item.img} alt={item.alt} />
+                    <img className="img-fluid" src={item.img} alt={item.alt} />
 
                     <div className="card-body">
                         <h4 className="cardTitle">{item.title}</h4>
@@ -73,7 +73,7 @@ function Course() {
         ));
     }
 
-    return <div className="row">{SubjectHandler()}</div>;
+    return <div className="row w-100 m-auto">{SubjectHandler()}</div>;
 }
 
 export default Course;

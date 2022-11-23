@@ -4,6 +4,7 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CreateModulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::post('/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Create Modules of Subject
+Route::post('addModulesOfSubject', [CreateModulesController::class, 'createModules']);

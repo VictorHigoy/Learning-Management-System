@@ -1,8 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import StudentLayout from "./layouts/authenticatedLayout/StudentNavigationBar/StudentLayout";
+import AdminLayout from "./layouts/authenticatedLayout/AdminNavigationBar/AdminLayout";
+
+import CourseDevLayout from "./layouts/authenticatedLayout/CourseDeveloperNavifationBar/CourseDevLayout";
+import DevDashboard from "../pages/courseDeveloper/DevDashboard";
+import CreateModules from "../pages/courseDeveloper/CreateModules/CreateModules";
+
 import Course from "../pages/student/Course";
 import Dashboard from "../pages/student/Dashboard";
-import AdminLayout from "./layouts/authenticatedLayout/AdminNavigationBar/AdminLayout";
 import Login from "./authentication/Login";
 import RequireAuth from "./authentication/RequireAuth";
 import NotRequireAuth from "./authentication/notRequireAuth";
@@ -25,6 +30,19 @@ function App() {
 
             <Route element={<RequireAuth allowedRoles={"admin"} />}>
                 <Route path="/admin/home" element={<AdminLayout />}></Route>
+            </Route>
+
+            <Route element={<RequireAuth allowedRoles={"courseDeveloper"} />}>
+                <Route element={<CourseDevLayout />}>
+                    <Route
+                        path="/developer/home"
+                        element={<DevDashboard />}
+                    ></Route>
+                    <Route
+                        path="/developer/createModules"
+                        element={<CreateModules />}
+                    ></Route>
+                </Route>
             </Route>
 
             {/* UnAuthorized Pages */}

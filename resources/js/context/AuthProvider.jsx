@@ -3,18 +3,20 @@ import { createContext, useState } from "react";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState();
-    let user;
+    let userInfo;
+    let role;
 
-    const userInfo = localStorage.getItem("user-info");
+    const user = localStorage.getItem("user-info");
     const token = localStorage.getItem("token");
+    const type = localStorage.getItem("type");
 
-    if (userInfo) {
-        user = JSON.parse(userInfo);
+    if (user) {
+        userInfo = JSON.parse(user);
+        role = JSON.parse(type);
     }
 
     return (
-        <AuthContext.Provider value={{ user, userInfo }}>
+        <AuthContext.Provider value={{ role, userInfo }}>
             {children}
         </AuthContext.Provider>
     );

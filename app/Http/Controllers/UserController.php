@@ -32,9 +32,10 @@ class UserController extends Controller
 
             $response = [
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
+                'type' => 'student'
             ];
-                    
+
             return response($response, 201);
 
         } elseif($request->type == 'Teacher') {
@@ -49,7 +50,8 @@ class UserController extends Controller
 
             $response = [
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
+                'type' => 'teacher'
             ];
                     
             return response($response, 201);
@@ -66,9 +68,10 @@ class UserController extends Controller
 
             $response = [
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
+                'type' => 'courseDeveloper'
             ];
-                    
+
             return response($response, 201);
 
         } elseif($request->type == 'Admin') {
@@ -83,9 +86,10 @@ class UserController extends Controller
 
             $response = [
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
+                'type' => 'admin'
             ];
-                    
+
             return response($response, 201);
 
         } else {

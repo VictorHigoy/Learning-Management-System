@@ -1,8 +1,8 @@
 import React from "react";
 
-function Footer() {
+function LoginFooter() {
     return (
-        <footer className="authFooter bg-dark text-light px-3 px-sm-5 py-4">
+        <footer className="unAuthFooter bg-dark text-light px-3 px-sm-5 py-4">
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-6">
@@ -92,4 +92,4 @@ function Footer() {
     );
 }
 
-export default Footer;
+export default LoginFooter;

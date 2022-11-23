@@ -36,12 +36,12 @@ function Navbar() {
                 >
                     <ul className="list-unstyled text-secondary text-decoration-none">
                         <Link
-                            to="/admin/home"
+                            to="/developer/home"
                             className="text-decoration-none text-dark"
                         >
                             <li
                                 className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
-                                    pathName === "/admin/home"
+                                    pathName === "/developer/home"
                                         ? "activeSideNavbarItem"
                                         : ""
                                 }`}
@@ -51,28 +51,28 @@ function Navbar() {
                             </li>
                         </Link>
                         <Link
-                            to="/admin/schedule"
+                            to="/developer/createModules"
                             className="text-decoration-none text-dark"
                         >
                             <li
                                 className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
-                                    pathName === "/admin/schedule"
+                                    pathName === "/developer/createModules"
                                         ? "activeSideNavbarItem"
                                         : ""
                                 }`}
                             >
                                 <i className="bi bi-calendar-check-fill fs-6 me-1 px-2 py-1 bg-light rounded"></i>
-                                Schedule
+                                Learning Materials
                             </li>
                         </Link>
 
                         <Link
-                            to="/admin/settings"
+                            to="/developer/settings"
                             className="text-decoration-none text-dark"
                         >
                             <li
                                 className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
-                                    pathName === "/admin/setting"
+                                    pathName === "/developer/setting"
                                         ? "activeSideNavbarItem"
                                         : ""
                                 }`}

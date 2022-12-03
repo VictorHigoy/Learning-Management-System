@@ -3,15 +3,18 @@ import ReactDOM from "react-dom";
 import "./bootstrap";
 import App from "./components/App";
 import { AuthProvider } from "./context/AuthProvider";
+import { CreateModuleProvider } from "./context/CourseDev/CreateModuleProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 if (document.getElementById("App")) {
     ReactDOM.render(
         <BrowserRouter>
             <AuthProvider>
-                <Routes>
-                    <Route path="/*" element={<App />} />
-                </Routes>
+                <CreateModuleProvider>
+                    <Routes>
+                        <Route path="/*" element={<App />} />
+                    </Routes>
+                </CreateModuleProvider>
             </AuthProvider>
         </BrowserRouter>,
         document.getElementById("App")

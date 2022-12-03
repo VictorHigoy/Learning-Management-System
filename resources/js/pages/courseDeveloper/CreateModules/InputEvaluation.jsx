@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import useCreateModule from "../../../hooks/CourseDev/useCreateModule";
 
-function InputAnalysis() {
+function InputEvaluation() {
     // States
-    const { AAEquestions, setAAEQuestions } = useCreateModule();
+    const { EvalQuestions, setEvalQuestions } = useCreateModule();
 
     const [error, setError] = useState(false);
 
     const [questionError, setQuestionError] = useState();
     const [textError, setTextError] = useState();
     const [isCorrectError, setIsCorrectError] = useState();
+
+    console.log(questionError);
+    console.log(textError);
+    console.log(isCorrectError);
 
     const numberOfChoices = [
         { id: "option1", rightAnswerNo: "rightAnswer1", letter: "A" },
@@ -87,7 +91,7 @@ function InputAnalysis() {
         const option = e.currentTarget.dataset.option;
         const radio = e.currentTarget.dataset.radio;
 
-        let arr = [...AAEquestions];
+        let arr = [...EvalQuestions];
         arr.forEach((item) => {
             if (item.id == name) {
                 item.question = value;
@@ -116,12 +120,12 @@ function InputAnalysis() {
             }
         });
 
-        setAAEQuestions(arr);
+        setEvalQuestions(arr);
     };
 
     useEffect(() => {
         // Error Handling : filtering the questions.question if it has an empty string
-        let filterQuestion = AAEquestions.filter(
+        let filterQuestion = EvalQuestions.filter(
             (item) => item.question === ""
         );
 
@@ -132,7 +136,7 @@ function InputAnalysis() {
         }
 
         //Error Handling : filtering the question.options[].text if it has an empty string
-        let filterText = AAEquestions.map((item, i) =>
+        let filterText = EvalQuestions.map((item, i) =>
             item.options.filter((opt) => opt.text === "")
         );
         let filterTextAgain = filterText.filter((x) => x.length !== 0);
@@ -144,7 +148,7 @@ function InputAnalysis() {
         }
 
         //Error Handling : filtering the question.options[].isCorrect if it has an empty string
-        let filterIsCorrect = AAEquestions.map((item, i) =>
+        let filterIsCorrect = EvalQuestions.map((item, i) =>
             item.options.filter((opt) => opt.isCorrect === "")
         );
 
@@ -155,7 +159,7 @@ function InputAnalysis() {
         } else {
             setIsCorrectError(false);
         }
-    }, [AAEquestions]);
+    }, [EvalQuestions]);
 
     const InputAnalysisHandler = () => {
         if (
@@ -166,7 +170,7 @@ function InputAnalysis() {
             console.log("ERROR");
             setError(true);
         } else {
-            console.log(AAEquestions);
+            console.log(EvalQuestions);
             setError(false);
         }
     };
@@ -191,7 +195,7 @@ function InputAnalysis() {
                             className={`form-control ${
                                 error &&
                                 questionError &&
-                                AAEquestions[index].question === ""
+                                EvalQuestions[index].question === ""
                                     ? "errorBorderColor"
                                     : ""
                             }`}
@@ -234,7 +238,7 @@ function InputAnalysis() {
                                 className={`form-control ${
                                     error &&
                                     textError &&
-                                    AAEquestions[index].options[i].text === ""
+                                    EvalQuestions[index].options[i].text === ""
                                         ? "errorBorderColor"
                                         : ""
                                 }`}
@@ -245,8 +249,8 @@ function InputAnalysis() {
                                 className={`form-check input-group-text m-0 ${
                                     error &&
                                     isCorrectError &&
-                                    AAEquestions[index].options[i].isCorrect ===
-                                        ""
+                                    EvalQuestions[index].options[i]
+                                        .isCorrect === ""
                                         ? "errorBorderColor"
                                         : ""
                                 }`}
@@ -279,7 +283,7 @@ function InputAnalysis() {
     // Render it all here
     return (
         <div className="mb-4 w-100">
-            <label className="fs-5 fw-semibold">Input Analysis : </label>
+            <label className="fs-5 fw-semibold">Input Evaluation : </label>
             <div className="p-3 inputAnalysisContainer shadow">
                 {numberOfQuestionsHandler()}
                 <div className="d-flex justify-content-end">
@@ -301,4 +305,4 @@ function InputAnalysis() {
     );
 }
 
-export default InputAnalysis;
+export default InputEvaluation;

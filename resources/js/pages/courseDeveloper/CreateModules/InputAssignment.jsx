@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import useCreateModule from "../../../hooks/CourseDev/useCreateModule";
 
-function InputAnalysis() {
+function InputAssignment() {
     // States
-    const { AAEquestions, setAAEQuestions } = useCreateModule();
+    const { AssignQuestions, setAssignQuestions } = useCreateModule();
 
     const [error, setError] = useState(false);
 
     const [questionError, setQuestionError] = useState();
-    const [textError, setTextError] = useState();
+
     const [isCorrectError, setIsCorrectError] = useState();
 
+    console.log(questionError);
+
+    console.log(isCorrectError);
+
     const numberOfChoices = [
-        { id: "option1", rightAnswerNo: "rightAnswer1", letter: "A" },
-        { id: "option2", rightAnswerNo: "rightAnswer2", letter: "B" },
-        { id: "option3", rightAnswerNo: "rightAnswer3", letter: "C" },
-        { id: "option4", rightAnswerNo: "rightAnswer4", letter: "D" },
+        { id: "option1", rightAnswerNo: "rightAnswer1", letter: "TRUE" },
+        { id: "option2", rightAnswerNo: "rightAnswer2", letter: "FALSE" },
     ];
 
     const numberOfQuestions = [
@@ -87,20 +89,10 @@ function InputAnalysis() {
         const option = e.currentTarget.dataset.option;
         const radio = e.currentTarget.dataset.radio;
 
-        let arr = [...AAEquestions];
+        let arr = [...AssignQuestions];
         arr.forEach((item) => {
             if (item.id == name) {
                 item.question = value;
-            }
-        });
-
-        arr.forEach((item, i) => {
-            if (item.id === option) {
-                item.options.map((val) => {
-                    if (val.id == name) {
-                        val.text = value;
-                    }
-                });
             }
         });
 
@@ -116,12 +108,12 @@ function InputAnalysis() {
             }
         });
 
-        setAAEQuestions(arr);
+        setAssignQuestions(arr);
     };
 
     useEffect(() => {
         // Error Handling : filtering the questions.question if it has an empty string
-        let filterQuestion = AAEquestions.filter(
+        let filterQuestion = AssignQuestions.filter(
             (item) => item.question === ""
         );
 
@@ -131,20 +123,8 @@ function InputAnalysis() {
             setQuestionError(false);
         }
 
-        //Error Handling : filtering the question.options[].text if it has an empty string
-        let filterText = AAEquestions.map((item, i) =>
-            item.options.filter((opt) => opt.text === "")
-        );
-        let filterTextAgain = filterText.filter((x) => x.length !== 0);
-
-        if (filterTextAgain.length !== 0) {
-            setTextError(true);
-        } else {
-            setTextError(false);
-        }
-
         //Error Handling : filtering the question.options[].isCorrect if it has an empty string
-        let filterIsCorrect = AAEquestions.map((item, i) =>
+        let filterIsCorrect = AssignQuestions.map((item, i) =>
             item.options.filter((opt) => opt.isCorrect === "")
         );
 
@@ -155,18 +135,14 @@ function InputAnalysis() {
         } else {
             setIsCorrectError(false);
         }
-    }, [AAEquestions]);
+    }, [AssignQuestions]);
 
     const InputAnalysisHandler = () => {
-        if (
-            questionError === true ||
-            textError === true ||
-            isCorrectError === true
-        ) {
+        if (questionError === true || isCorrectError === true) {
             console.log("ERROR");
             setError(true);
         } else {
-            console.log(AAEquestions);
+            console.log(AssignQuestions);
             setError(false);
         }
     };
@@ -191,7 +167,7 @@ function InputAnalysis() {
                             className={`form-control ${
                                 error &&
                                 questionError &&
-                                AAEquestions[index].question === ""
+                                AssignQuestions[index].question === ""
                                     ? "errorBorderColor"
                                     : ""
                             }`}
@@ -203,7 +179,7 @@ function InputAnalysis() {
                             }}
                         />
                     </div>
-                    <div className="row gx-4 gy-2">
+                    <div className="d-flex">
                         {multipleChoiceHandler(
                             questionNumber,
                             radioNumber,
@@ -219,57 +195,38 @@ function InputAnalysis() {
     const multipleChoiceHandler = (questionNumber, radioNumber, index) => {
         return numberOfChoices.map((choice, i) => {
             return (
-                <div className="col-xl-6 mb-3" key={choice.id}>
-                    <div className="d-flex">
+                <div className="d-flex" key={choice.id}>
+                    <label
+                        className="my-auto me-2 fw-semibold"
+                        htmlFor={choice.letter}
+                    >
+                        {choice.letter}
+                    </label>
+
+                    <div
+                        className={`form-check input-group-text my-0 me-3 ${
+                            error &&
+                            isCorrectError &&
+                            AssignQuestions[index].options[i].isCorrect === ""
+                                ? "errorBorderColor"
+                                : ""
+                        }`}
+                    >
+                        <input
+                            className={`form-check-input me-2 ms-1 `}
+                            type="radio"
+                            name={radioNumber}
+                            data-option={questionNumber}
+                            data-radio={choice.id}
+                            id={questionNumber + choice.rightAnswerNo}
+                            onChange={setQuestionHandler}
+                        />
                         <label
-                            className="m-auto me-2 fw-semibold"
-                            htmlFor={choice.letter}
+                            htmlFor={questionNumber + choice.rightAnswerNo}
+                            className="form-check-label"
                         >
-                            {choice.letter}.
+                            Right Answer
                         </label>
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                name={choice.id}
-                                className={`form-control ${
-                                    error &&
-                                    textError &&
-                                    AAEquestions[index].options[i].text === ""
-                                        ? "errorBorderColor"
-                                        : ""
-                                }`}
-                                data-option={questionNumber}
-                                onChange={setQuestionHandler}
-                            />
-                            <div
-                                className={`form-check input-group-text m-0 ${
-                                    error &&
-                                    isCorrectError &&
-                                    AAEquestions[index].options[i].isCorrect ===
-                                        ""
-                                        ? "errorBorderColor"
-                                        : ""
-                                }`}
-                            >
-                                <input
-                                    className={`form-check-input me-2 ms-1 `}
-                                    type="radio"
-                                    name={radioNumber}
-                                    data-option={questionNumber}
-                                    data-radio={choice.id}
-                                    id={questionNumber + choice.rightAnswerNo}
-                                    onChange={setQuestionHandler}
-                                />
-                                <label
-                                    htmlFor={
-                                        questionNumber + choice.rightAnswerNo
-                                    }
-                                    className="form-check-label"
-                                >
-                                    Right Answer
-                                </label>
-                            </div>
-                        </div>
                     </div>
                 </div>
             );
@@ -279,7 +236,7 @@ function InputAnalysis() {
     // Render it all here
     return (
         <div className="mb-4 w-100">
-            <label className="fs-5 fw-semibold">Input Analysis : </label>
+            <label className="fs-5 fw-semibold">Input Assignment : </label>
             <div className="p-3 inputAnalysisContainer shadow">
                 {numberOfQuestionsHandler()}
                 <div className="d-flex justify-content-end">
@@ -301,4 +258,4 @@ function InputAnalysis() {
     );
 }
 
-export default InputAnalysis;
+export default InputAssignment;

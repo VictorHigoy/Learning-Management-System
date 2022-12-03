@@ -78,11 +78,11 @@ function TopNavbar({ children }) {
                             aria-describedby="button-addon2"
                         />
                         <button
-                            className="btn btn-outline-dark bg-secondary text-light"
+                            className="btn btn-outline-dark bg-secondary text-light searchIcon"
                             type="button"
                             id="button-addon2"
                         >
-                            <i className="bi bi-search"></i>
+                            <i className="bi bi-search searchIcon"></i>
                         </button>
                     </div>
                 </div>

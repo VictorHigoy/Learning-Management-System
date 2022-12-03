@@ -8,7 +8,7 @@ function Navbar() {
     console.log(pathName);
 
     return (
-        <div className="navbar navbar-expand-lg navbar-light py-2 py-lg-4 ps-3 ps-lg-4 pe-3 pe-lg-0 parentNavbar">
+        <div className="navbar navbar-expand-lg navbar-light py-2 pb-lg-4 ps-3 ps-lg-4 pe-3 pe-lg-0 parentNavbar">
             <div className="container-fluid p-0 d-lg-block">
                 <div className="d-flex align-items-center mb-lg-5">
                     <img

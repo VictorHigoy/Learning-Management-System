@@ -5,7 +5,7 @@
     height: 100vh;
     position: fixed;
     background-color: white;
-    z-index: 2;
+    z-index: 10;
 
     .sideNavarLogo {
         width: 40px;
@@ -70,7 +70,6 @@
 
     .sideBar {
         width: 100%;
-        z-index: 1;
         height: 0;
     }
 

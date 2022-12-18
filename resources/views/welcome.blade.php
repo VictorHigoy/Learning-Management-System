@@ -13,6 +13,12 @@
 
         <!-- Styles -->
 
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+  <!-- or -->
+  <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"/>
+
     </head>
     <body>
         <main id='App'>

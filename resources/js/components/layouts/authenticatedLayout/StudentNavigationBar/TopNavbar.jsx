@@ -1,11 +1,12 @@
 import React from "react";
 import { Fragment } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
+import logoImg from "../../../../../../public/images/newLogin/logo.png";
+import userProfile from "../../../../../../public/images/man.png";
 
-function TopNavbar({ children }) {
+function TopNavbar({ openSidebar, setOpenSidebar, children }) {
     const { userInfo } = useAuth();
-    const navigate = useNavigate();
+
 
     const LogoutHandler = () => {
         localStorage.clear();
@@ -14,80 +15,100 @@ function TopNavbar({ children }) {
 
     return (
         <Fragment>
-            <div className="d-block d-sm-flex justify-content-between shadow-sm py-2 px-3 px-lg-5  position-relative">
-                <div className="topNavbarSearch my-auto d-none d-sm-block pe-3">
-                    <div className="input-group align-middle">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search courses...."
-                            aria-describedby="button-addon2"
-                        />
-                        <button
-                            className="btn btn-outline-dark bg-secondary text-light"
-                            type="button"
-                            id="button-addon2"
-                        >
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div className="w-100 d-flex justify-content-end">
-                    <i className="bi bi-bell-fill fs-5 m-sm-auto my-2 me-3 me-sm-5 bellIcon align-middle"></i>
-                    <div className="dropdown">
-                        <a
-                            id="dropdownmenu"
-                            className="nav-link d-flex"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            <h4 className="my-auto me-3 dropdown-toggle">
-                                {userInfo.name}
-                            </h4>
-                            <img
-                                src="/images/man.png"
-                                className="img-fluid"
-                                alt="profile Pic"
-                                height="66"
-                                width="66"
-                            />
-                        </a>
+            <div className="topbarChild d-flex justify-content-between align-items-center">
+                <li className="topBarLogo text-dark">
+                    <div className="logo-details d-flex align-items-center">
+                        <i
+                            className={`bx rounded-circle ${
+                                openSidebar ? "bx-menu-alt-right" : "bx-menu"
+                            }`}
+                            id="btn"
+                            onClick={() => {
+                                setOpenSidebar((prev) => !prev);
+                            }}
+                        ></i>
 
-                        <div
-                            className="dropdown-menu p-0"
-                            aria-labelledby="dropdownmenu"
-                        >
-                            <button
-                                type="button"
-                                className="dropdown-item"
-                                onClick={LogoutHandler}
-                            >
-                                Logout
-                            </button>
+                        <img
+                            className="ms-2 ms-sm-3 my-auto"
+                            src={logoImg}
+                            width="35"
+                            height="35"
+                            alt="bcp-logo"
+                        />
+                        <div className="logo_name text-dark ms-1 ms-sm-3">
+                            BESTLINK
+                        </div>
+                        <div className="my-auto search-boxContainer d-none d-lg-block">
+                            <input
+                                className="form-control search-box"
+                                type="search"
+                                placeholder="Search..."
+                                aria-label="Example text with button addon"
+                                aria-describedby="button-addon1"
+                            />
                         </div>
                     </div>
-                </div>
-                <div className="topNavbarSearch my-auto mt-3 mt-sm-0 d-sm-none d-block">
-                    <div className="input-group align-middle">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search courses...."
-                            aria-describedby="button-addon2"
-                        />
-                        <button
-                            className="btn btn-outline-dark bg-secondary text-light"
-                            type="button"
-                            id="button-addon2"
-                        >
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
+                </li>
+                <div className="d-flex align-items-center justify-content-end">
+                    <li>
+                        <i className="bx bxs-message-dots fs-4 me-3 mt-1 m-0"></i>
+                        <i className="bx bxs-bell fs-4 mt-1 m-0"></i>
+                    </li>
+                    <li>
+                        <div className="nav-item dropdown my-auto ms-4">
+                            <a
+                                id="dropdownmenu"
+                                className="nav-link dropdown-toggle d-flex align-items-center"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <h5 className="m-0 d-none d-sm-block">
+                                    {userInfo.name}
+                                </h5>
+                                <img
+                                    className="ms-0 ms-sm-3"
+                                    src={userProfile}
+                                    width="32"
+                                    height="32"
+                                    alt="profile-picture"
+                                />
+                            </a>
+                            <ul className="dropdown-menu border shadow dropdownContainer">
+                                <li>
+                                    <button
+                                        type="button"
+                                        className="dropdown-item"
+                                    >
+                                        Edit Profile
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        type="button"
+                                        className="dropdown-item"
+                                    >
+                                        Settings
+                                    </button>
+                                </li>
+                                <li>
+                                    <hr className="dropdown-divider" />
+                                </li>
+                                <li>
+                                    <button
+                                        type="button"
+                                        className="dropdown-item"
+                                        onClick={LogoutHandler}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </div>
             </div>
-            <main id="App">{children}</main>
         </Fragment>
     );
 }

@@ -1,90 +1,172 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { Fragment } from "react";
 
-function Navbar() {
+function Navbar({ openSidebar }) {
+    const [openDropdown, setOpenDropdown] = useState(false);
+    const [openChildOneDropdown, setOpenChildOneDropdown] = useState(false);
+
     const pathName = useLocation().pathname;
 
     console.log(pathName);
 
     return (
-        <div className="navbar navbar-expand-lg navbar-light py-2 pb-lg-4 ps-3 ps-lg-4 pe-3 pe-lg-0 parentNavbar">
-            <div className="container-fluid p-0 d-lg-block">
-                <div className="d-flex align-items-center mb-lg-5">
-                    <img
-                        className="sideNavarLogo me-2"
-                        src="/images/newLogin/logo.png"
-                        alt="bcp-logo"
-                    />
-                    <h3 className="py-3 mb-0 fw-bold">BESTLINK</h3>
-                </div>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div
-                    className="collapse navbar-collapse my-3 my-lg-0"
-                    id="navbarNavAltMarkup"
-                >
-                    <ul className="list-unstyled text-secondary text-decoration-none">
-                        <Link
-                            to="/developer/home"
-                            className="text-decoration-none text-dark"
-                        >
-                            <li
-                                className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
+        <Fragment>
+            <div
+                className={`sidebar rounded shadow ${
+                    openSidebar ? "open" : "close"
+                }`}
+            >
+                <ul className="nav-list p-0 m-0">
+                    <li className="d-block d-lg-none">
+                        <i className="bx bx-search"></i>
+                        <input type="text" placeholder="Search..." />
+                        <span className="tooltip">Search</span>
+                    </li>
+                    <Link to="/developer/home" className="text-decoration-none">
+                        <li>
+                            <a
+                                className={`${
                                     pathName === "/developer/home"
-                                        ? "activeSideNavbarItem"
+                                        ? "activeSideBar"
                                         : ""
                                 }`}
                             >
-                                <i className="bi bi-clipboard-data-fill fs-6 me-1 px-2 py-1 bg-light rounded"></i>
-                                Dashboard
-                            </li>
-                        </Link>
-                        <Link
-                            to="/developer/createModules"
-                            className="text-decoration-none text-dark"
-                        >
-                            <li
-                                className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
+                                <i className="bx bx-grid-alt"></i>
+                                <span className="links_name">Dashboard</span>
+                            </a>
+                            <span className="tooltip">Dashboard</span>
+                        </li>
+                    </Link>
+                    <Link
+                        to="/developer/createModules"
+                        className="text-decoration-none"
+                    >
+                        <li>
+                            <a
+                                className={`${
                                     pathName === "/developer/createModules"
-                                        ? "activeSideNavbarItem"
+                                        ? "activeSideBar"
                                         : ""
                                 }`}
                             >
-                                <i className="bi bi-calendar-check-fill fs-6 me-1 px-2 py-1 bg-light rounded"></i>
-                                Learning Materials
-                            </li>
-                        </Link>
-
-                        <Link
-                            to="/developer/settings"
-                            className="text-decoration-none text-dark"
+                                <i className="bx bx-palette"></i>
+                                <span className="links_name">Course</span>
+                            </a>
+                            <span className="tooltip">Course</span>
+                        </li>
+                    </Link>
+                    <li>
+                        <a href="/login/login.html">
+                            <i className="bx bx-log-in"></i>
+                            <span className="links_name">Login UI</span>
+                        </a>
+                        <span className="tooltip">Login UI</span>
+                    </li>
+                    <li className={`${openDropdown ? "showMenu" : ""}`}>
+                        <div
+                            className="iocn-link"
+                            onClick={() => {
+                                setOpenDropdown((prev) => !prev);
+                            }}
                         >
-                            <li
-                                className={`fs-6 fw-semibold mb-2 SideNavbarItem ${
-                                    pathName === "/developer/setting"
-                                        ? "activeSideNavbarItem"
-                                        : ""
-                                }`}
-                            >
-                                <i className="bi bi-sliders fs-6 me-1 px-2 py-1 bg-light rounded"></i>
-                                Setting
+                            <a>
+                                <i className="bx bx-message-square-error"></i>
+                                <span className="links_name">Errors</span>
+                            </a>
+                            <i className="bx bx-chevron-down arrow"></i>
+                        </div>
+                        <ul className="sub-menu">
+                            <li>
+                                <a className="link_name p-0">Errors UI</a>
                             </li>
-                        </Link>
-                    </ul>
-                </div>
+                            <li>
+                                <div class="dropdown">
+                                    <div
+                                        className={`d-flex ${
+                                            openChildOneDropdown
+                                                ? "dumyShow"
+                                                : ""
+                                        }`}
+                                        onClick={() => {
+                                            setOpenChildOneDropdown(
+                                                (prev) => !prev
+                                            );
+                                        }}
+                                    >
+                                        <a
+                                            class="border-0"
+                                            aria-expanded="false"
+                                        >
+                                            Dropdown button
+                                        </a>
+                                        <i className="bx bx-chevron-down arrow"></i>
+                                    </div>
+                                    <ul
+                                        class={`dropdown-menu border-0 p-0 ps-3 ${
+                                            openChildOneDropdown ? "show" : ""
+                                        }`}
+                                    >
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                Action
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                Another action
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                Something else here
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/error/500.html">500 Error</a>
+                            </li>
+                        </ul>
+                        {/* <!-- <span className="tooltip">Analytics</span> --> */}
+                    </li>
+                    <li>
+                        <a href="/loading/loading.html">
+                            <i className="bx bx-message-dots"></i>
+                            <span className="links_name">Loading UI</span>
+                        </a>
+                        <span className="tooltip">Loading UI</span>
+                    </li>
+                    <li>
+                        <a href="/inputAndButton/inputAndButton.html">
+                            <i className="bx bx-edit-alt"></i>
+                            <span className="links_name">
+                                Input, btn, & Dropdown
+                            </span>
+                        </a>
+                        <span className="tooltip">
+                            Input, Button, & Dropdown
+                        </span>
+                    </li>
+                    <li>
+                        <a href="/table/table.html">
+                            <i className="bx bx-table"></i>
+                            <span className="links_name">Table</span>
+                        </a>
+                        <span className="tooltip">Table</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="bx bx-cog"></i>
+                            <span className="links_name">Setting</span>
+                        </a>
+                        <span className="tooltip">Setting</span>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </Fragment>
     );
 }
 

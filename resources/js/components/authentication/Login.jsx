@@ -1,5 +1,4 @@
 import React from "react";
-import LoginFooter from "../layouts/LoginFooter";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
@@ -9,10 +8,18 @@ function Login() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [type, setType] = useState("Student");
-    const [error1, setError] = useState();
+    const [showPassword, setShowPassword] = useState("password");
     let error;
 
     console.log(type);
+
+    const togglePassword = () => {
+        if (showPassword === "password") {
+            setShowPassword("text");
+        } else {
+            setShowPassword("password");
+        }
+    };
 
     const results = localStorage.getItem("error-info");
     if (results) {
@@ -50,7 +57,7 @@ function Login() {
     return (
         <div className="loginContainer">
             <div className="d-lg-flex position-relative">
-                <div className="d-flex">
+                <div className="d-flex logoContainer">
                     <div className="polygon1 position-relative">
                         <img
                             className="logo"
@@ -62,29 +69,29 @@ function Login() {
                 </div>
                 <div className="form-container d-flex justify-content-center w-100 p-3 p-lg-5">
                     <div className="m-auto">
-                        <div className="form-header1 ps-2 mb-4">
-                            <h1 className="header1 fw-bold fs-1">BCP</h1>
-                            <h1 className="header2 fw-bold fs-1">
+                        <div className="form-header1 ps-2 mb-5">
+                            <h1 className="header1 fw-bold fs-1 m-0">BCP</h1>
+                            <h1 className="header2 fw-bold fs-1 m-0">
                                 LEARNING MANAGEMENT
                             </h1>
                         </div>
                         <form onSubmit={SubmitHandler}>
                             <label
                                 htmlFor="dropdown"
-                                className="fw-semibold fs-5"
+                                className="fw-semibold fs-6 mb-2"
                             >
-                                Dashboard:
+                                Dashboard
                             </label>
                             <div id="dropdown" className="dropdown">
                                 <button
-                                    className="dropdownMenu py-3 px-4 fs-4 fw-semibold btn btn-light dropdown-toggle w-100 d-flex justify-content-between align-items-center dropDownBorder"
+                                    className="dropdownMenu px-3 fw-normal btn dropdown-toggle w-100 d-flex justify-content-between align-items-center dropDownBorder border-0"
                                     type="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
                                     {type}
                                 </button>
-                                <ul className="dropdownMenu dropdown-menu w-100">
+                                <ul className="dropdown-menu w-100">
                                     <li>
                                         <button
                                             value="Student"
@@ -136,20 +143,19 @@ function Login() {
                                 </ul>
                             </div>
 
-                            <span className="lineBreak my-4" />
+                            <span className="loginLineBreak my-4" />
                             <div className="mb-3">
                                 <label
                                     htmlFor="exampleInputEmail1"
-                                    className="form-label fw-semibold fs-5"
+                                    className="form-label fw-semibold fs-6 w-100"
                                 >
                                     Email
                                 </label>
                                 <input
                                     type="email"
-                                    className={`input-form form-control py-3 px-4 fs-5 fw-semibold ${
-                                        error ? "errorBorderColor" : ""
+                                    className={`inputField input-form form-control px-3 fs-6 fw-normal ${
+                                        error ? "errorInput" : "noErrorInput"
                                     }`}
-                                    placeholder="s190xxxxx"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
                                     onChange={(e) => setEmail(e.target.value)}
@@ -158,37 +164,49 @@ function Login() {
                             <div className="mb-3">
                                 <label
                                     htmlFor="exampleInputPassword1"
-                                    className="form-label fw-semibold fs-5"
+                                    className="form-label fw-semibold fs-6 w-100"
                                 >
                                     Password
                                 </label>
-                                <input
-                                    type="password"
-                                    className={`input-form form-control py-3 px-4 fs-5 fw-semibold ${
-                                        error ? "errorBorderColor" : ""
-                                    }`}
-                                    placeholder="********"
-                                    id="exampleInputPassword1"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                />
+                                <div className="passwordContainer w-100">
+                                    <div className=" w-100 overflow-hidden">
+                                        <input
+                                            type={showPassword}
+                                            className={`inputField input-form form-control px-3 fs-6 fw-normal ${
+                                                error
+                                                    ? "errorInput"
+                                                    : "noErrorInput"
+                                            }`}
+                                            id="exampleInputPassword1"
+                                            onChange={(e) =>
+                                                setPassword(e.target.value)
+                                            }
+                                        />
+                                        <div className="overflow-hidden">
+                                            <a
+                                                className="passwordButton"
+                                                onClick={togglePassword}
+                                            >
+                                                {showPassword === "password" ? (
+                                                    <i className="bi bi-eye-fill" />
+                                                ) : (
+                                                    <i className="bi bi-eye-slash-fill" />
+                                                )}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="mb-3">
-                                <p className="text-danger">{error && error}</p>
+                                <p className="errorInput">{error && error}</p>
                             </div>
-                            <button
-                                type="submit"
-                                className="sumbit-button btn btn-primary w-100 py-2 px-4 fs-4"
-                            >
-                                Login
+                            <button className="buttonTemplate sumbit-button btn rounded-2 w-100 mt-3">
+                                Log in
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-
-            <LoginFooter />
         </div>
     );
 }

@@ -1,3 +1,9 @@
+@use "../../abstract/" as *;
+
+.loginContainer {
+    background-color: $white;
+}
+
 .polygon1 {
     position: relative;
     background: url("/public/images/newLogin/bcp.jpg"),
@@ -11,7 +17,7 @@
 
 .polygon2 {
     position: absolute;
-    background: #00308f;
+    background: $secondary-color;
     left: 30px;
     width: 610px;
     height: 100vh;
@@ -26,11 +32,93 @@
     clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 72% 100%, 97% 50%, 72% 0);
 }
 
+.buttonTemplate {
+    font-size: 20px !important;
+    padding: 9px 0px !important;
+    color: $white !important;
+    background-color: $primary-color !important;
+}
+
+.loginLineBreak {
+    border-bottom: 2px solid $light-gray;
+    display: block;
+    margin: auto;
+}
+
 .logo {
     position: absolute;
     width: 45%;
     top: 30%;
     left: 20%;
+}
+
+.inputField {
+    color: $gray;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    border-radius: 0.375rem !important;
+}
+
+.header1 {
+    color: $primary-color;
+}
+
+.header2 {
+    color: black;
+}
+
+.form-header1 {
+    border-left: solid #00308f 8px;
+}
+
+.errorInput {
+    color: $danger-color !important;
+}
+
+/* Dropdown */
+.dropdownMenu {
+    font-size: 20px !important;
+    border-radius: 0.375rem !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    background-color: $light-gray !important;
+    border: none !important;
+}
+
+.dropdown ul li button:focus {
+    background-color: $primary-color !important;
+}
+
+/* Password */
+
+.passwordContainer {
+    position: relative !important;
+}
+.passwordButton {
+    position: absolute;
+    top: 8%;
+    right: 4%;
+    z-index: 99;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: all ease 0.1s;
+    border: none;
+}
+.bi-eye-fill,
+.bi-eye-slash-fill {
+    // position: absolute;
+    // top: 8%;
+    // right: 4%;
+    // z-index: 99;
+    font-size: 20px;
+    cursor: pointer;
+    color: $gray;
+    // padding: 5px 10px;
+    // border-radius: 50%;
+}
+
+.passwordButton:hover {
+    background-color: $light-gray;
 }
 
 @media screen and (max-width: 1120px) {
@@ -78,11 +166,11 @@
 
     .logo {
         position: static;
-        max-width: 100px;
+        max-width: 90px;
         display: flex;
         justify-content: center;
         margin: auto;
-        padding-top: 15px;
+        padding-top: 10px;
     }
 
     .form-container {
@@ -92,22 +180,9 @@
     }
 }
 
-.header1 {
-    color: rgb(0, 191, 255);
+@media screen and (max-width: 992px) and (max-height: 780px) {
+    .logo {
+        max-width: 70px;
+        padding-top: 5px;
+    }
 }
-
-.header2 {
-    color: black;
-}
-
-.form-header1 {
-    border-left: solid #00308f 8px;
-}
-
-.lineBreak {
-    border-bottom: 3px solid #6c757d;
-    display: block;
-    margin: auto;
-}
-
-

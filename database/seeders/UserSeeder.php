@@ -2,13 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use App\Models\CourseDeveloper;
-use App\Models\Student;
-use App\Models\Teacher;
-use App\Models\User;
+
+use App\Models\Users\Admin;
+use App\Models\Users\Student;
+use App\Models\Users\Teacher;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Users\CourseDeveloper;
+use App\Models\Users\CourseManager;
+use App\Models\Users\SuperAdmin;
 
 class UserSeeder extends Seeder
 {
@@ -19,34 +20,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Student::factory()->create([
-            'name' => 'student user',
-            'email' => 'student@example.com',
-            'password' => bcrypt('test'),
-            'section' => '1',
-            'year_level' => '4',
-            'subjects' => 'english, math, science, physical education',
-        ]);
+        Student::factory()->count(1000)->create();
 
-        Teacher::factory()->create([
-            'name' => 'teacher user',
-            'email' => 'teacher@example.com',
-            'password' => bcrypt('test'),
-            'year_levels' => '1,2,3,4',
-            'subjects' => 'english, math, science, physical education',
-        ]);
+        Teacher::factory()->count(5)->create();
 
-        CourseDeveloper::factory()->create([
-            'name' => 'dev user',
-            'email' => 'dev@example.com',
-            'password' => bcrypt('test'),
-            'department' => 'CCS',
-        ]);
+        CourseDeveloper::factory()->count(1)->create();
 
-        Admin::factory()->create([
-            'name' => 'admin user',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('test'),
-        ]);
+        CourseManager::factory()->count(1)->create();
+
+        Admin::factory()->count(1)->create();
+
+        SuperAdmin::factory()->count(1)->create();
+        
     }
 }

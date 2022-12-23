@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
+use App\Models\CoreFunctions\ToDoList;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Student extends Model
+class CourseDeveloper extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
 
-    protected $guard = 'Student';
+
+    protected $guard = 'CourseDeveloper';
 
     protected $fillable = [
         'name',
         'email',
         'password',
-        'section',
-        'year_level',
-        'subjects',
+        'department',
     ];
 
     /**
@@ -48,8 +48,18 @@ class Student extends Model
         'email_verified_at' => 'datetime',
     ];
 
+    public function usertype()
+    {
+        return 'CourseDeveloper';
+    }
+
     public function getAuthPassword()
     {
         return $this->password;
+    }
+
+    public function ToDolist()
+    {
+        return $this->hasMany(ToDoList::class);
     }
 }

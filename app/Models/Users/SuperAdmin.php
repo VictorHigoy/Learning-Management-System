@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Admin extends Model
+class SuperAdmin extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
-    /**
-    * The attributes that are mass assignable.
-    *
-    * @var array<int, string>
-    */
-
-   protected $guard = 'Admin';
+    protected $guard = 'SuperAdmin';
 
    protected $fillable = [
        'name',
@@ -35,18 +29,17 @@ class Admin extends Model
        'remember_token',
    ];
 
-
-   /**
-    * The attributes that should be cast.
-    *
-    * @var array<string, string>
-    */
    protected $casts = [
        'email_verified_at' => 'datetime',
    ];
 
-   public function getAuthPassword()
-    {
-        return $this->password;
+    public function usertype(){
+        return 'SuperAdmin';
     }
+
+   public function getAuthPassword()
+   {
+       return $this->password;
+   }
 }
+

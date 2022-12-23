@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class CourseDeveloper extends Model
+
+class Teacher extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
@@ -16,15 +17,15 @@ class CourseDeveloper extends Model
      *
      * @var array<int, string>
      */
-
     
-    protected $guard = 'CourseDeveloper';
+    protected $guard = 'Teacher';
 
     protected $fillable = [
         'name',
         'email',
         'password',
-        'department',
+        'year_level',
+        'subjects',
     ];
 
     /**
@@ -46,6 +47,10 @@ class CourseDeveloper extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function usertype(){
+        return 'Teacher';
+    }
 
     public function getAuthPassword()
     {

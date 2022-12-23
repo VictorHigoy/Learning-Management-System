@@ -52,9 +52,19 @@ return [
             'provider' => 'coursedeveloper',
         ],
 
+        'CourseManager' => [
+            'driver' => 'session',
+            'provider' => 'coursemanager',
+        ],
+
         'Admin' => [
             'driver' => 'session',
             'provider' => 'admin',
+        ],
+
+        'SuperAdmin' => [
+            'driver' => 'session',
+            'provider' => 'SuperAdmin',
         ],
     ],
 
@@ -98,19 +108,27 @@ return [
     'providers' => [
         'student' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Student::class,
+            'model' => App\Models\Users\Student::class,
         ],
         'teacher' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Teacher::class,
+            'model' => App\Models\Users\Teacher::class,
         ],
         'coursedeveloper' => [
             'driver' => 'eloquent',
-            'model' => App\Models\CourseDeveloper::class,
+            'model' => App\Models\Users\CourseDeveloper::class,
+        ],
+        'coursemanager' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users\CourseManager::class,
         ],
         'admin' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => App\Models\Users\Admin::class,
+        ],
+        'SuperAdmin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users\SuperAdmin::class,
         ]
     ],
     // 'providers' => [
@@ -167,12 +185,24 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'CourseManger' => [
+            'provider' => 'CourseManager',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'Admin' => [
             'provider' => 'Admin',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
+        'SuperAdmin' => [
+            'provider' => 'SuperAdmin',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

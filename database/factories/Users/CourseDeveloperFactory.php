@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Users;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Teacher>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class TeacherFactory extends Factory
+class CourseDeveloperFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,9 +20,7 @@ class TeacherFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'year_levels' => '1,2,3,4',
-            'subjects' => 'english, math, science, physical education',
-
+            'department' => 'CCS',
         ];
     }
 }

@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use App\Models\User;
-use App\Models\Admin;
-use App\Models\Student;
-use App\Models\Teacher;
+use App\Models\Users\Admin;
+use App\Models\Users\Student;
+use App\Models\Users\Teacher;
 use Illuminate\Http\Request;
-use App\Models\CourseDeveloper;
+use App\Models\Users\CourseManager;
+use App\Http\Controllers\Controller;
+use App\Models\Users\CourseDeveloper;
+use App\Models\Users\SuperAdmin;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -36,7 +39,7 @@ class UserController extends Controller
                 'type' => 'student'
             ];
 
-            return response($response, 201);
+            return response($response, 201)->cookie('sanctum', $token, 1440);
 
         } elseif($request->type == 'Teacher') {
 
@@ -54,6 +57,24 @@ class UserController extends Controller
                 'type' => 'teacher'
             ];
                     
+            return response($response, 201);
+
+        } elseif($request->type == 'CourseManager') {
+
+            $user = CourseManager::where('email', $request->email)->first();
+
+            if(!Auth::guard('CourseManager')->attempt(['email' => $request->email, 'password' => $request->password])){
+                return response(['Bad Credentials'], 401);
+            }
+
+            $token = $user->createToken('LMS',['CourseManager'])->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token,
+                'type' => 'CourseManager'
+            ];
+
             return response($response, 201);
 
         } elseif($request->type == 'CourseDeveloper') {
@@ -92,8 +113,35 @@ class UserController extends Controller
 
             return response($response, 201);
 
+        } elseif($request->type == 'SuperAdmin') {
+
+            $user = SuperAdmin::where('email', $request->email)->first();
+
+            if(!Auth::guard('SuperAdmin')->attempt(['email' => $request->email, 'password' => $request->password])){
+                return response(['Bad Credentials'], 401);
+            }
+
+            $token = $user->createToken('LMS',['SuperAdmin'])->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token,
+                'type' => 'SuperAdmin'
+            ];
+
+            return response($response, 201);
+
         } else {
             return response(['Unknown Request'], 400);
         }
+    }
+
+    public function logout(Request $request){
+
+        $request->user()->currentAccessToken()->delete();
+        
+        return [
+            'message' => 'Logged out'
+        ];  
     }
 }

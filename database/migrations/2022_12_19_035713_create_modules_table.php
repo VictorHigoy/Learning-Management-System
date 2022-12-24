@@ -15,17 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->string('cw_id')->primary();
+            $table->string('cw_id')->primary()->unique();
             $table->foreignId('course_id')
                 ->constrained('courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            // $table->foreign('course_id')
-            //     ->references('id')->on('courses')
-            //     ->constrained()
-            //     ->onDelete('cascade')
-            //     ->onUpdate('cascade');
-            // course id + course week
             $table->boolean('status');
             $table->timestamps();
         });

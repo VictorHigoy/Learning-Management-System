@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Modules\Course;
 
-class CoursesController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.

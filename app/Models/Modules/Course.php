@@ -10,6 +10,14 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'course',
+        'course_code',
+        'departments',
+        'approval'
+    ];
+
+
     public function module(){
         return $this->hasMany(Module::class);
     }

@@ -13,6 +13,12 @@ class Module extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'cw_id',
+        'course_id',
+        'status',
+    ];
+
     public $incrementing = false;
 
     public function course(){

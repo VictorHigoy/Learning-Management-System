@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\CoreFunctions\ToDoList;
 use App\Http\Controllers\Users\UserController;
-use App\Http\Controllers\Modules\CoursesController;
+use App\Http\Controllers\CourseManager\CMCourseController;
+use App\Http\Controllers\CourseManager\CMModuleController;
 use App\Http\Controllers\CoreFunctions\ExamGrantingController;
 use App\Http\Controllers\CoreFunctions\SubjectTaggingController;
 use App\Http\Controllers\CoreFunctions\AccountCreationController;
 use App\Http\Controllers\CoreFunctions\ModuleStatusUpdateController;
-use App\Models\CoreFunctions\ToDoList;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanc
 
 //student route
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum','abilities:Student']], function(){
-    Route::apiResource('courses', CoursesController::class);
+    Route::apiResource('courses', CourseController::class);
 });
 
 //teachers route
@@ -43,6 +44,8 @@ Route::group(['prefix' => 'coursedeveloper', 'middleware' => ['auth:sanctum','ab
 //course manager route
 Route::group(['prefix' => 'coursemanager', 'middleware' => ['auth:sanctum','abilities:CourseManager']], function(){
     Route::apiResource('todolist', ToDoList::class);
+    Route::apiResource('course', CMCourseController::class);
+    Route::apiResource('module', CMModuleController::class);
 });
 
 //admin route

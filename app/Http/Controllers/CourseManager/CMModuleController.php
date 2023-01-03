@@ -23,9 +23,9 @@ class CMModuleController extends Controller
     public function store(ModuleRequest $request)
     {
 
-        $cw_id = $request['course_code'] . $request['module_week'];
+        $id = $request['course_code'] . '-' . $request['course_id'] . '-' . $request['module_week'];
         
-        $exist = Module::where('cw_id', $cw_id)->get();
+        $exist = Module::where('id', $id)->where('course_id', $request['course_id'])->get();
 
         $bool = 'True';
 
@@ -38,8 +38,9 @@ class CMModuleController extends Controller
         }
 
         Module::create([
-            'cw_id' => $cw_id,
+            'id' => $id,
             'course_id' => $request['course_id'],
+            'week' => $request['module_week'],
             'status' => $request['status']
         ]);
 

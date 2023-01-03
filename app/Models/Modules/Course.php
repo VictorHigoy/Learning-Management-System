@@ -27,9 +27,9 @@ class Course extends Model
             Lesson::class, 
             Module::class,
             'course_id',
-            'cw_id',
+            'module_id',
             'id',
-            'cw_id'
+            'id'
         );
     }
 
@@ -38,9 +38,9 @@ class Course extends Model
             Activity::class, 
             Module::class,
             'course_id',
-            'cw_id',
+            'module_id',
             'id',
-            'cw_id'
+            'id'
         );
     }
 
@@ -49,9 +49,9 @@ class Course extends Model
             Quiz::class, 
             Module::class,
             'course_id',
-            'cw_id',
+            'module_id',
             'id',
-            'cw_id'
+            'id'
         );
     }
 }

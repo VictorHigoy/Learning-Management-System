@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('to_do_lists', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_developer_id')
-                ->constrained('course_developers')
-                ->onDelete('cascade')   
-                ->onUpdate('cascade');
+                ->constrained()
+                ->onDelete('cascade');
             $table->string('title');
             $table->string('message');
             $table->string('status');

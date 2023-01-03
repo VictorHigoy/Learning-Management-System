@@ -9,6 +9,10 @@ use App\Http\Controllers\CoreFunctions\ExamGrantingController;
 use App\Http\Controllers\CoreFunctions\SubjectTaggingController;
 use App\Http\Controllers\CoreFunctions\AccountCreationController;
 use App\Http\Controllers\CoreFunctions\ModuleStatusUpdateController;
+use App\Http\Controllers\CourseDeveloper\CDActivity;
+use App\Http\Controllers\CourseDeveloper\CDLesson;
+use App\Http\Controllers\CourseDeveloper\CDQuiz;
+use App\Http\Controllers\Modules\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +33,7 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanc
 //student route
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum','abilities:Student']], function(){
     Route::apiResource('courses', CourseController::class);
+    Route::apiResource('lesson', LessonController::class);
 });
 
 //teachers route
@@ -38,7 +43,9 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth:sanctum','abilities:
 
 //course developer route
 Route::group(['prefix' => 'coursedeveloper', 'middleware' => ['auth:sanctum','abilities:CourseDeveloper']], function(){
-        
+    Route::apiResource('lesson', CDLesson::class);
+    Route::apiResource('quiz', CDQuiz::class);
+    Route::apiResource('activty', CDActivity::class);
 });
 
 //course manager route

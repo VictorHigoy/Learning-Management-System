@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Core\TagSubjectsRequest;
+use App\Http\Requests\Core\SingleSubjectTagging;
 
 class SubjectTaggingController extends Controller
 {
@@ -68,6 +69,34 @@ class SubjectTaggingController extends Controller
             'errors' => $errors,
             'does not exist' => $null,
         ], 201);
+
+    }
+
+
+    //patch header
+    public function update(SingleSubjectTagging $request, $id)
+    {
+        $user = Student::find($id);
+
+        $subjects = $user->subjects;
+
+        $subjectsArray = explode(',', $subjects);
+
+        foreach($subjectsArray as $subs){
+            if($subs == $request['subjects']){
+                return response([
+                    'Subject Already Exist' => $request['subjects']
+                ]);
+            }
+        }
+
+        $user->update(['subjects' => $request['subjects']]);
+
+        $response = [
+            'Successfully added' => $request['subjects']
+        ];
+
+        return response($response, 201);
 
     }
 

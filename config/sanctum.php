@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Laravel\Sanctum\Sanctum;
 
 return [
@@ -46,7 +47,7 @@ return [
     |
     */
 
-    'expiration' => 1440,
+    'expiration' => 10080,
 
     /*
     |--------------------------------------------------------------------------

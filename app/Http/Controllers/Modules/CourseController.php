@@ -16,13 +16,14 @@ class CourseController extends Controller
      */
     public function index()
     {
+        
         $user = Auth::user();
 
         $subjects = $user->subjects;
 
         $subjectsarray = explode (",", $subjects);
 
-        $courses = Course::whereIn('course', $subjectsarray)->where('departments', $user->departments)->get();
+        $courses = Course::whereIn('course_code', $subjectsarray)->where('departments', $user->departments)->get();
 
         $response = [
             'subjects' => $courses

@@ -10,6 +10,14 @@ class Activity extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'module_id',
+        'preliminaries',
+        'activity_type',
+        'title',
+        'body',
+    ];
+
     public function module(){
         return $this->belongsTo(Module::class);
     }

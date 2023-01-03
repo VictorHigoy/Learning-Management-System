@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Lesson extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'module_id',
+        'preliminaries',
+        'title',
+        'body',
+        'embed_links',
+    ];
     
     public function module(){
         return $this->belongsTo(Module::class);

@@ -2,7 +2,6 @@
 
 namespace Database\Factories\Users;
 
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +16,6 @@ class StudentFactory extends Factory
      */
     public function definition()
     {
-
-        $subject = '';
 
         for($i = 0; $i < 2; $i++) {
 

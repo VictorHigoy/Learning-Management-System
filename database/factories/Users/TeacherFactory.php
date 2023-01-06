@@ -20,7 +20,13 @@ class TeacherFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'year_levels' => '1,2,3,4',
+            'departments' =>fake()->randomElement(array(
+                'CCS',
+                'CRIM',
+                'EDUC',
+                'Business'
+            )),
+            'year_and_sections' => '0101',
             'subjects' => fake()->randomElement(array(
                 'Mathematics',
                 'Science',

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Models\User;
 use App\Models\Users\Admin;
 use App\Models\Users\Student;
 use App\Models\Users\Teacher;
@@ -140,8 +139,10 @@ class UserController extends Controller
 
         $request->user()->currentAccessToken()->delete();
         
-        return [
+        $response =  [
             'message' => 'Logged out'
-        ];  
+        ];
+        
+        return response($response, 201);
     }
 }

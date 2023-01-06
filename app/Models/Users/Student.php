@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\Students\ActivityResult;
+use App\Models\Students\ExaminationGrant;
 use App\Models\Students\Grade;
 use App\Models\Students\QuizResult;
 use Laravel\Sanctum\HasApiTokens;
@@ -64,6 +65,10 @@ class Student extends Model
 
     public function grade(){
         return $this->hasMany(Grade::class);    
+    }
+
+    public function grant(){
+        return $this->hasMany(ExaminationGrant::class);    
     }
 
     public function activityresult(){

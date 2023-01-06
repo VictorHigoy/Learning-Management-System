@@ -11,7 +11,7 @@ class CMModuleController extends Controller
 {
     public function index()
     {
-
+        
     }
 
     /**

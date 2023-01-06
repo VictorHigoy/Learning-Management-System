@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\CoreFunctions\ToDoList;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\CourseManager\CMCourseController;
 use App\Http\Controllers\CourseManager\CMModuleController;
 use App\Http\Controllers\CoreFunctions\ExamGrantingController;
 use App\Http\Controllers\CoreFunctions\SubjectTaggingController;
 use App\Http\Controllers\CoreFunctions\AccountCreationController;
+use App\Http\Controllers\CoreFunctions\AnnouncementsController;
 use App\Http\Controllers\CoreFunctions\ModuleStatusUpdateController;
 use App\Http\Controllers\CourseDeveloper\CDActivity;
 use App\Http\Controllers\CourseDeveloper\CDLesson;
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'coursedeveloper', 'middleware' => ['auth:sanctum','ab
 
 //course manager route
 Route::group(['prefix' => 'coursemanager', 'middleware' => ['auth:sanctum','abilities:CourseManager']], function(){
-    Route::apiResource('todolist', ToDoList::class);
+    Route::post('/createtask', [CMToDoListController::class, 'createtask']);
     Route::apiResource('course', CMCourseController::class);
     Route::apiResource('module', CMModuleController::class);
 });
@@ -72,6 +72,11 @@ Route::group(['prefix' => 'core', 'middleware' => ['auth:sanctum', 'abilities:Su
 
 //Admin Core
 Route::group(['prefix' => 'core', 'middleware' => ['auth:sanctum', 'abilities:Admin']], function(){
+    Route::post('/batchmoduleupdatestatus', [ModuleStatusUpdateController::class, 'editModuleStatus']);
+    Route::post('/createannouncement', [AnnouncementsController::class, 'createAnnouncement']);
+    Route::post('/createannouncement', [AnnouncementsController::class, 'createAnnouncement']);
+    Route::patch('/editannouncement', [AnnouncementsController::class, 'editAnnouncement']);
+    Route::patch('/deleteannouncement', [AnnouncementsController::class, 'deleteAnnouncement']);
     Route::apiResource('examgrant', ExamGrantingController::class);
     Route::apiResource('modulestatusupdate', ModuleStatusUpdateController::class);
     Route::apiResource('tagsubject', SubjectTaggingController::class);

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('module_id')->constrained()->onDelete('cascade');
+            $table->foreignId('module_id')->unsigned()->onDelete('cascade');
             $table->string('preliminaries');
             $table->string('activity_type');
             $table->string('title');

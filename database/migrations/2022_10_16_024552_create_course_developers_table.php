@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('department');
+            $table->string('departments');
+            $table->string('subjects'); //subject codes
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();

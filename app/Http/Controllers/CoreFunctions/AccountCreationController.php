@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\CoreFunctions;
 
 use League\Csv\Reader;
-use Illuminate\Http\Request;
 use App\Models\Users\Student;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Core\AccountCreationRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class AccountCreationController extends Controller
@@ -25,59 +25,49 @@ class AccountCreationController extends Controller
             $csv = $request->file('file');
             $csv = Reader::createFromPath($csv->getRealPath(), 'r');
             $csv->setHeaderOffset(0);
+
+            $rules = [
+                'first_name' => [
+                    'required',
+                ],
+                'last_name' => [
+                    'required',
+                ],
+                'email' => [
+                    'required',
+                    'email',
+                    'unique:students'
+                ],
+                'departments' => [
+                    'required',
+                ],
+                'section' => [
+                    'required',
+                ],
+                'year_level' => [
+                    'required',
+                ],
+            ];
         
             foreach ($csv as $student) {
 
-                $subject = '';
+                $firstTwoCharactersOfLastName = substr($student['last_name'], 0, 2);
 
-                for ($i = 0; $i < 2; $i++) {
-                    $tempsubject = fake()->randomElement(array(
-                        'Mathematics',
-                        'Science',
-                        'English',
-                        'Computer Science',
-                        'Physical Education',
-                    ));
+                $date = Carbon::now()->format('Y');
 
-                    if (!$subject) {
-                        $subject .= $tempsubject;
-                    } else {
-                        $subject .= ',' . $tempsubject;
-                    }
-                }
-
-                $rules = [
-                    'first_name' => [
-                        'required',
-                    ],
-                    'last_name' => [
-                        'required',
-                    ],
-                    'email' => [
-                        'required',
-                        'email',
-                        'unique:students'
-                    ],
-                    'departments' => [
-                        'required',
-                    ],
-                    'section' => [
-                        'required',
-                    ],
-                    'year_level' => [
-                        'required',
-                    ]
-                ];
+                $password = '#' . $firstTwoCharactersOfLastName . $date;
 
                 $newstudent = [
                     'first_name' => $student['first_name'],
                     'last_name' => $student['last_name'],
                     'email' => $student['email'],
-                    'password' => Hash::make('password'),
-                    'departments' => $student['program'],
+                    'password' => Hash::make($password),
+                    'departments' => $student['departments'],
                     'section' => $student['section'],
                     'year_level' => $student['year_level'],
-                    'subjects' => $subject
+                    'subjects' => '',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ];
 
                 $message = ['email.unique' => 'Email :input is already taken'];
@@ -87,7 +77,7 @@ class AccountCreationController extends Controller
                     $errors[] = $validator->errors();
                 } else {
                     $insertStudents[] = $newstudent;
-                    $success[] = $newstudent['email'];
+                    $success[] = $newstudent['email'] . ' - ' . $password;
                 }
 
             }

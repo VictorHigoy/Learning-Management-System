@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('year_levels');
+            $table->string('departments');
+            $table->string('year_and_sections');
             $table->string('subjects');
             $table->rememberToken();
             $table->timestamps();

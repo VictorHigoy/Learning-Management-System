@@ -35,7 +35,7 @@ class CourseFactory extends Factory
             'course' => $subject,
             'course_code' => $subject.'00',
             'departments' => $department,
-            'approval' => fake()->randomElement(array('True','False')) 
+            'approval' => fake()->randomElement(array(1,0)) 
         ];
     }
 }

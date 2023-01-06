@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('course_developer_id')
                 ->constrained()
                 ->onDelete('cascade');
+            $table->foreignId('course_id')
+                ->unsigned()
+                ->onDelete('cascade');
             $table->string('title');
             $table->string('message');
             $table->string('status');

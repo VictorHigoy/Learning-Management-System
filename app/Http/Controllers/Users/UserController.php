@@ -16,6 +16,8 @@ class UserController extends Controller
 {
     public function login(Request $request){
 
+        $scrf_token = csrf_token();
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
@@ -35,7 +37,8 @@ class UserController extends Controller
             $response = [
                 'user' => $user,
                 'token' => $token,
-                'type' => 'student'
+                'type' => 'student',
+                'csrf' => $scrf_token
             ];
 
             return response($response, 201)->cookie('sanctum', $token, 1440);
@@ -71,7 +74,7 @@ class UserController extends Controller
             $response = [
                 'user' => $user,
                 'token' => $token,
-                'type' => 'CourseManager'
+                'type' => 'CourseManager',
             ];
 
             return response($response, 201);

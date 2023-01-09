@@ -25,7 +25,8 @@ class LessonController extends Controller
         $courses = Course::with('lesson')->whereIn('course_code', $subjectsarray)->where('departments', $user->departments)->get();
         
         $response = [
-            'Lessons' => $courses
+            'Lessons' => $courses,
+            'test'
         ];
 
         return response($response, 201);

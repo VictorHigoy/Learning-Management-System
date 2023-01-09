@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 use Laravel\Sanctum\Sanctum;
 
 return [

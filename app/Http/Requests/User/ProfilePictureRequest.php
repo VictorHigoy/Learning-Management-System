@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Core;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ExamGrantRequest extends FormRequest
+class ProfilePictureRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ExamGrantRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|file|mimes:csv|size:25000'
+            'file' => 'required|file|mimes:png,jpg|max:5000'
         ];
     }
 }

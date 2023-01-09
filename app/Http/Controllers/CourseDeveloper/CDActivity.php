@@ -16,7 +16,7 @@ class CDActivity extends Controller
      */
     public function index()
     {
-        //
+        return 'test';
     }
 
     /**

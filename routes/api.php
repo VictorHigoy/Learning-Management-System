@@ -13,6 +13,7 @@ use App\Http\Controllers\CourseDeveloper\CDActivity;
 use App\Http\Controllers\CourseDeveloper\CDLesson;
 use App\Http\Controllers\CourseDeveloper\CDQuiz;
 use App\Http\Controllers\Modules\LessonController;
+use App\Http\Controllers\Users\ProfilePictureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth:sanctum','abilities:
 Route::group(['prefix' => 'coursedeveloper', 'middleware' => ['auth:sanctum','abilities:CourseDeveloper']], function(){
     Route::apiResource('lesson', CDLesson::class);
     Route::apiResource('quiz', CDQuiz::class);
-    Route::apiResource('activty', CDActivity::class);
+    Route::apiResource('activity', CDActivity::class);
 });
 
 //course manager route
@@ -80,4 +81,8 @@ Route::group(['prefix' => 'core', 'middleware' => ['auth:sanctum', 'abilities:Ad
     Route::apiResource('examgrant', ExamGrantingController::class);
     Route::apiResource('modulestatusupdate', ModuleStatusUpdateController::class);
     Route::apiResource('tagsubject', SubjectTaggingController::class);
+});
+
+Route::group(['prefix' => 'users', 'middleware' => ['auth:sanctum']], function(){
+    Route::post('/uploadprofilepicture', [ProfilePictureController::class, 'uploadProfilePicture']);
 });

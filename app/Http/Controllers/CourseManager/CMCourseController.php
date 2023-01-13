@@ -7,6 +7,7 @@ use App\Models\Modules\Course;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CourseManager\CourseRequest;
+use App\Models\Modules\Module;
 
 class CMCourseController extends Controller
 {
@@ -56,10 +57,36 @@ class CMCourseController extends Controller
             return response(['already exist'], 201);
         }
 
-        Course::create($request->all());
+        $course = Course::create([
+            'course' => $request['course'],
+            'course_code' => $request['course_code'],
+            'departments' => $request['departments'],
+            'approval' => $request['approval']
+        ]);
+
+
+
+        $moduleCount = $request['modules'];
+        $moduleWeek = 1;
+        $moduleCreated = [];
+
+        for($i = 0; $i < $moduleCount; $i++) {
+            $moduleId = $course['course_code'] . '-' . $moduleWeek;
+
+            $module = Module::create([
+                'id' => $moduleId,
+                'course_id' => $course['id'],
+                'week' => $moduleWeek,
+                'status' => 0,
+            ]);
+
+            $moduleWeek++;
+            $moduleCreated[] = $module;
+        }
 
         $response = [
-            'Course Succesfully created' => $request['course']
+            'Course Succesfully created' => $course,
+            'Modules created' => $moduleCreated
         ];
 
         return response($response, 201);

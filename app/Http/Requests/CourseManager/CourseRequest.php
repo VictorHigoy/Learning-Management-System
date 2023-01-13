@@ -28,6 +28,7 @@ class CourseRequest extends FormRequest
             'course_code' => 'required|string',
             'departments' => 'required|string',
             'approval' => 'required|boolean',
+            'modules' => 'required|integer'
         ];
     }
 }

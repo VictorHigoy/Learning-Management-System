@@ -26,7 +26,7 @@ class CMModuleController extends Controller
         $id = $request['course_code'] . '-' . $request['course_id'] . '-' . $request['module_week'];
         
         $exist = Module::where('id', $id)->where('course_id', $request['course_id'])->get();
-
+        
         $bool = 'True';
 
         if($exist == '[]'){
